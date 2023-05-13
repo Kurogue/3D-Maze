@@ -1,0 +1,154 @@
+This project requires you to model the problem below as graph and then use a known graph algorithm to solve the problem.
+
+This problem is based on the “Itsy-Bitsy Spider” maze problem (from “MAD MAZES: Intriguing Mind Twisters for Puzzle Buffs, Game Nuts and Other Smart People” by Robert Abbott). 
+
+The text of the problem is quoted below. A diagram of the maze is provided separately. Fred was discussing a problem with his architect:
+
+“I have a terrible itsy bitsy spider infestation. Actually, it’s only one itsy bitsy spider, but he’s
+very persistent. He spins a web on the roof that clogs up the gutter. When it rains, he is washed
+down the water spout. But then along comes the sun and dries up all the rain and the itsy bitsy
+spider climbs up the spout again. And there’s not a damn thing I can do about it.”
+“Don’t worry,” said the architect. “He may be persistent but spiders aren’t that bright. I
+suggest we put a maze at the bottom of the water spout; then the spider won’t be able to find
+his way back up.”
+
+The architect came back the next day with the diagram shown at the right. “What I propose
+is this: we run the water spout into a large metal box. The box will contain many small
+chambers on five levels. The water will come in at the top, on Level A, will travel from chamber
+to chamber, and will drain out at this opening on Level E. There has to be a path through
+the box, otherwise the water won’t be able to drain through. But I’ve made the path very
+complicated. Once the spider gets washed out of the opening on Level E, he won’t be able to
+figure out how to get back through the box and back into the water spout.
+
+“The solid black lines represent walls, which the spider cannot get through. I’ve used yellow
+to indicate floors. If the spider’s on a yellow square, he cannot travel from that point down to
+the next level. If a square is not colored yellow, then he can travel down to the corresponding
+square in the level below. To figure out whether the spider can travel up, you have to check out
+the corresponding square in the level above. If that square has no floor, then the spider can
+travel up. If the square does have a floor (that is, it’s colored yellow), then the spider cannot
+travel up.”
+
+“This sounds like a perfectly reasonable plan to me,” said Fred. “In fact, I can’t figure out how
+to get through the box myself.” So, they built the box and added it to the water spout. The
+first rainstorm did wash the spider through the box, but, unfortunately, after the sun dried up
+the rain the spider went back into the box, traveled through it and back up the water spout.
+Can you discover a path the spider could take to get through the box? You have to in the
+entrance on Level E and then work your way up to the water spout on Level A.
+
+In addition to the report, you should implement your algorithm in C++ or Java so that it can
+solve “Itsy Bitsy Spider” mazes.
+
+Input
+
+Your program should read its input from the file input.txt, in the following format. The input
+file describes one maze to solve.
+
+Each maze starts with 9 integers on 3 lines. The first line describes the number of levels, rows,
+and columns in the maze (`, r, and c), respectively, while the second and third lines describe the
+locations of the start and goal. Note that the coordinates of the start and goal are given using a
+base of 0. For example, the coordinate (0, 0, 0) would be the first column on the first row of the
+first level of the maze.
+
+The next `r lines contain the directional information for each cell in the maze. The bottom level
+is described first, and all rows for one level of the maze are described before the next level appears.
+Each line has c 6-digit binary values, where each bit represents whether the spider can travel in
+that direction (1) or not (0). The direction bits are given in the order north, east, south, west, up,
+and down.
+
+For the original “Itsy Bitsy Spider” maze, the input is:
+3
+5 4 4
+0 3 3
+4 0 0
+010010 010100 010100 001100
+001010 001010 001010 100010
+101010 101000 110000 000110
+100000 100010 010010 000100
+010001 010100 011100 000110
+000011 000011 101011 000011
+010001 000110 101000 001001
+010010 000101 100001 100010
+001010 011000 000110 001001
+101001 100001 001001 100011
+100010 001001 110000 000110
+000011 110000 010110 000111
+000001 001010 010001 000110
+010010 100110 001010 000011
+010001 000110 100010 000011
+000011 010010 000101 000011
+011000 010101 010100 000101
+101001 010001 000101 001001
+101000 010001 000101 100001
+100001 010001 010100 000101
+
+Note that the levels are given bottom-to-top, rather than top-to-bottom, as they appear in the
+original. The starting point for the maze is the bottom-left corner of the bottom level (coordinate
+(0, 3, 3), last bit string on the fourth line), while the goal is in the upper-left of the top level
+(coordinate (4, 0, 0)).
+As an example, when the spider is in the upper-left corner of the bottom level of the maze (the
+first bit string in the input), it can move east or up. You may assume that the input is well-formed:
+the spider will not be able to leave the maze from the top, bottom, left, right, front, or back, and
+there are no “one-way” walls. You may also assume that the maze will not contain more than 10
+million cells total.
+
+Output
+
+Your program should write its output to the file output.txt, in the following format. The output
+should consist of a path from the start to the goal, for each maze. Each solution should be a
+single line consisting of a sequence of moves, separated by spaces, where each move is a single letter
+representing the direction of that move: N, E, S, W, U, or D (north, east, south, west, up, or
+down). Of course, the sequence of moves must solve the corresponding maze described in the input
+file.
+
+For example, if your first four moves take you 2 spaces right and down on the bottom level, then
+rise to second-lowest level, your output should begin with E E S U.
+You are welcome to try figuring out the solution to the “Itsy Bitsy Spider” puzzle on your own,
+but that won’t get you any points. Your assignment is to model the maze as a graph and to solve
+the problem using an appropriate graph algorithm.
+
+Example
+
+Consider the 3 × 3 × 3 maze whose layout is represented by the ASCII art below (bottom level
+first):
+
++-+---+
+|#|# #|
++-+ +-+
+|#|#|#|
+| +-+ |
+|# # #|
++-----+
++-+---+
+| |# |
+| +-+-+
+| | | |
++-+ | |
+|#|#|#|
++-+-+-+
++---+-+
+|# |#|
+| +-+ |
+|#| |
+| +---+
+| # #|
++-----+
+
+In this representation, the walls are shown as -, |, and +, while the floors are represented as #.
+Assuming the starting point is the upper-left corner of the bottom (first) level, and the goal is the
+bottom-right of the top (final) level, the input describing this maze is given by:
+
+3 3 3
+0 0 0
+2 2 2
+000010 011000 000110
+001010 100010 001010
+110000 010100 100100
+001001 010010 000101
+100001 001011 001011
+000010 100000 100000
+011000 000101 001000
+101000 010001 100101
+110001 010100 000100
+
+The solution to this maze is:
+U S D S E E N U U W D D N E U W U W S S E E
