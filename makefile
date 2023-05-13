@@ -1,5 +1,5 @@
 maze:
-	g++ -std=c++11 -o maze project3.cpp
+	g++ -std=c++11 -o maze maze.cpp
 
 clean:
 	rm maze
