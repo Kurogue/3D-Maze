@@ -4,7 +4,7 @@ The way that I have implemented the project is with a DFS algorithm using an adj
 
 All instructions for the project are given in the intructions .txt file provided. 
 
-Example inputs are under the examples folder, these must be in the same directory as the executable and renamed as input.txt to work as intended.
+Example inputs are under the examples folder, these must be in the same directory as the executable and renamed as input.txt to work as intended. The solutions to these examples are also provided in the examples folder.
 
 ### Compile and Run Commands
 
